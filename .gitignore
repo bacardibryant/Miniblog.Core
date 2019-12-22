@@ -9,6 +9,7 @@
 *.pubxml
 launchSettings.json
 src/appsettings.json
+appsettings.json
 
 # Uncomment lines below to prevent pushing appsettings to repository
 # src/appsettings.json
