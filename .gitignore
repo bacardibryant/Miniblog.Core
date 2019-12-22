@@ -8,6 +8,9 @@
 *.sln.docstates
 *.pubxml
 launchSettings.json
+appsettings.json
+/src/appsettings.json
+src/appsettings.json
 
 # Uncomment lines below to prevent pushing appsettings to repository
 # src/appsettings.json
