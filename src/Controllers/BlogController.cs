@@ -36,8 +36,6 @@ namespace Miniblog.Core.Controllers
             var posts = allPosts.Skip(_settings.Value.PostsPerPage * page).Take(_settings.Value.PostsPerPage);
 
             ViewData["TotalPostCount"] = allPosts.Count();
-
-            ViewData["TotalPostCount"] = allPosts.Count();
             ViewData["Title"] = _manifest.Name;
             ViewData["Description"] = _manifest.Description;
             ViewData["prev"] = $"/{page + 1}/";
