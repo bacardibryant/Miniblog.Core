@@ -23,8 +23,10 @@ appsettings.Development.json
 src/wwwroot/Posts/*
 Posts/*
 wwwroot/Posts/*
+
 #ignore dotnet-tools.json file
 src/.config/dotnet-tools.json
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
