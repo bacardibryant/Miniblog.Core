@@ -2,11 +2,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Miniblog.Core.Services;
+using System.IO;
 using WebEssentials.AspNetCore.OutputCaching;
 using WebMarkupMin.AspNetCore2;
 using WebMarkupMin.Core;
@@ -80,6 +84,11 @@ namespace Miniblog.Core
                     options.LogoutPath = "/logout/";
                 });
 
+            services.Configure<RazorViewEngineOptions>(options =>
+            {
+                options.ViewLocationExpanders.Add(new ThemeViewLocationExpander());
+            });
+
             // HTML minification (https://github.com/Taritsyn/WebMarkupMin)
             services
                 .AddWebMarkupMin(options =>
@@ -107,6 +116,8 @@ namespace Miniblog.Core
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var settings = app.ApplicationServices.GetRequiredService<IOptions<BlogSettings>>();
+
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
@@ -128,6 +139,14 @@ namespace Miniblog.Core
             app.UseWebOptimizer();
 
             app.UseStaticFilesWithCache();
+
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),
+                $@"Views/Themes/{settings.Value.Theme}")),
+                RequestPath = string.Empty
+            });
+
 
             if (Configuration.GetValue<bool>("forcessl"))
             {

@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Views\Themes\Default\css\abovethefold.scss" />
+    <Content Include="Views\Themes\Default\css\admin.scss" />
+    <Content Include="Views\Themes\Default\css\belowthefold.scss" />
+    <Content Include="Views\Themes\Default\css\comments.scss" />
+    <Content Include="Views\Themes\Default\css\login.scss" />
+    <Content Include="Views\Themes\Default\css\_variables.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Azure.ImageOptimizer" Version="1.1.0.39" />
     <PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.250" />
     <PackageReference Include="LigerShark.WebOptimizer.Sass" Version="3.0.40-beta" />
@@ -16,6 +25,13 @@
     <PackageReference Include="WebEssentials.AspNetCore.StaticFilesWithCache" Version="1.0.1" />
     <PackageReference Include="WebMarkupMin.AspNetCore2" Version="2.7.0" />
     <PackageReference Include="WilderMinds.MetaWeblog" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Themes\Dorian\Blog\" />
+    <Folder Include="Views\Themes\Dorian\css\" />
+    <Folder Include="Views\Themes\Dorian\Shared\" />
+    <Folder Include="wwwroot\css\" />
   </ItemGroup>
 
 </Project>
