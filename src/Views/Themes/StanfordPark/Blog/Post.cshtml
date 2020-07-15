@@ -14,7 +14,7 @@
 
 <article class="post container" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
 	<header>
-		<h1 itemprop="name headline"><a href="@Model.GetLink()" rel="canonical" itemprop="url">@Model.Title</a></h1>
+		<h1 itemprop="name headline"><a href="@Model.GetLink()" rel="canonical" itemprop="url">@Model.Title | Stanford Park</a></h1>
 		<time datetime="@Model.PubDate.ToString("s")" itemprop="datePublished">Published @Model.PubDate.ToString("MMM d, yyyy")</time>
 		@if (User.Identity.IsAuthenticated)
 		{
@@ -65,9 +65,9 @@
 	@section Preload {
 		@* This lazy loads the stylesheet in a non-render blocking way *@
 		@*<link rel="preload" href="~/css/comments.scss" as="style" />*@
-		<link rel="preload" href="~/Themes/Default/css/comments.scss" as="style" />
+		<link rel="preload" href="~/Themes/StanfordPark/css/comments.scss" as="style" />
 		<noscript>@*<link rel="stylesheet" href="~/css/comments.scss" />*@</noscript>
-		<noscript><link rel="stylesheet" href="~/Themes/Default/css/comments.scss" /></noscript>
+		<noscript><link rel="stylesheet" href="~/Themes/StanfordPark/css/comments.scss" /></noscript>
 
 		@if (isCodePreview)
 		{
@@ -82,7 +82,7 @@
 	@section Scripts {
 		<script src="~/js/admin.js" async defer></script>
 		@*<link rel="stylesheet" href="~/css/admin.scss" />*@
-		<link rel="stylesheet" href="~/Themes/Default/css/admin.scss" />
+		<link rel="stylesheet" href="~/Themes/StanfordPark/css/admin.scss" />
 
 	}
 }

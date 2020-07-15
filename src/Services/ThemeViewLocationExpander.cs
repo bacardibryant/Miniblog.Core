@@ -1,15 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Miniblog.Core.Services
 {
+    /*
+     *  Theming implementation taken from Hisham's Blog
+     *  http://www.hishambinateya.com/theming-in-asp.net-core
+     *  https://github.com/hishamco/Theming/blob/master/Theming/Views/Themes/DarkTheme/Home/Index.cshtml
+     *  
+     */
+
+
+    using Microsoft.AspNetCore.Mvc.Razor;
+    using Microsoft.Extensions.Options;
+    using System;
+    using System.Collections.Generic;
+
     public class ThemeViewLocationExpander : IViewLocationExpander
     {
-        private const string ValueKey = "theme";
+        private const string ValueKey = "Theme";
 
         public IEnumerable<string> ExpandViewLocations(ViewLocationExpanderContext context, IEnumerable<string> viewLocations)
         {
@@ -24,10 +30,11 @@ namespace Miniblog.Core.Services
             }
 
             context.Values.TryGetValue(ValueKey, out string theme);
+            theme = string.IsNullOrEmpty(theme) ? "Default" : theme;
 
             if (!string.IsNullOrEmpty(theme))
             {
-                return ExpandViewLocationsCore(viewLocations, theme);
+                return this.ExpandViewLocationsCore(viewLocations, theme);
             }
 
             return viewLocations;
@@ -48,10 +55,18 @@ namespace Miniblog.Core.Services
 
         private IEnumerable<string> ExpandViewLocationsCore(IEnumerable<string> viewLocations, string theme)
         {
+            var newLocations = new List<string>();
             foreach (var location in viewLocations)
             {
-                yield return location.Insert(7, $"Themes/{theme}/");
+                var l = location.Insert(7, $"Themes/{theme}/");
+                newLocations.Add(l);
+
+                /* the yield return did not work to update the values. So I created a new modified collection and returned it. */
+
+                //yield return location;
+                //yield return location.Insert(7, $"Themes/{theme}/");
             }
+            return newLocations as IEnumerable<string>;
         }
     }
 }

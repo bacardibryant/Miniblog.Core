@@ -9,5 +9,8 @@ namespace Miniblog.Core
         public string Owner { get; set; } = "The Owner";
 
         public int PostsPerPage { get; set; } = 4;
+
+        public string Theme { get; set; }
+
     }
 }

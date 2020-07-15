@@ -14,14 +14,14 @@
 
 	<link rel="preload" href="~/js/site.js" as="script" />
 	@*<link rel="preload" href="~/css/belowthefold.scss" as="style" />*@
-	<link rel="preload" href="~/Themes/Default/css/belowthefold.scss" as="style" />
+	<link rel="preload" href="~/Themes/StanfordPark/css/belowthefold.scss" as="style" />
 
 	<noscript>@*<link rel="stylesheet" href="~/css/belowthefold.scss" />*@</noscript>
-	<noscript><link rel="stylesheet" href="~/Themes/Default/css/belowthefold.scss" /></noscript>
+	<noscript><link rel="stylesheet" href="~/Themes/StanfordPark/css/belowthefold.scss" /></noscript>
 
 	@RenderSection(Constants.Preload, required: false)
 	@*<link rel="stylesheet" href="~/css/abovethefold.scss" inline />*@
-	<link rel="stylesheet" href="~/Themes/Default/css/abovethefold.scss" inline />
+	<link rel="stylesheet" href="~/Themes/StanfordPark/css/abovethefold.scss" inline />
 
 
 	<meta property="og:type" content="article" />
@@ -50,7 +50,7 @@
 
 	<header class="siteheader">
 		<div class="container">
-			<p itemprop="name"><a href="~/" itemprop="url">@manifest.Name</a></p>
+			<p itemprop="name"><a href="~/" itemprop="url">@manifest.Name</a> Stanford Park</p>
 			By <span itemprop="author">@settings.Value.Owner</span>
 		</div>
 	</header>
@@ -73,10 +73,6 @@
 						{
 							<li><a asp-controller="Blog" asp-action="Edit" asp-route-id="">@Miniblog.Core.Properties.Resources.NewPost</a></li>
 							<li><a href="~/logout/" title="@Miniblog.Core.Properties.Resources.SignOutAsAdministrator">@Miniblog.Core.Properties.Resources.SignOut</a></li>
-							<li><select id="theme-selector">
-									<option value="Default" selected>Default</option>
-									<option value="StanfordPark"></option>
-								</select></li>
 						}
 						else
 						{
@@ -93,10 +89,10 @@
 
 	@* This lazy loads the stylesheet in a non-render blocking way *@
 	@*<link rel="preload" href="~/css/belowthefold.scss" as="style" />*@
-	<link rel="preload" href="~/Themes/Default/css/belowthefold.scss" as="style" />
+	<link rel="preload" href="~/Themes/StanfordPark/css/belowthefold.scss" as="style" />
 
 	<noscript>@*<link rel="stylesheet" href="~/css/belowthefold.scss" />*@</noscript>
-	<noscript><link rel="stylesheet" href="~/Themes/Default/css/belowthefold.scss" /></noscript>
+	<noscript><link rel="stylesheet" href="~/Themes/StanfordPark/css/belowthefold.scss" /></noscript>
 
 	<script src="~/js/site.js" async defer></script>
 	@RenderSection(Constants.Scripts, required: false)
