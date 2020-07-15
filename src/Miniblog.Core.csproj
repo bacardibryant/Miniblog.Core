@@ -8,6 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Views\Blog\Comments.cshtml" />
+    <None Include="Views\Blog\Edit.cshtml" />
+    <None Include="Views\Blog\Index.cshtml" />
+    <None Include="Views\Blog\Post.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\Offline.cshtml" />
+    <None Include="Views\Shared\_SocialSharing.cshtml" />
+    <None Include="wwwroot\Themes\Default\css\abovethefold.scss" />
+    <None Include="wwwroot\Themes\Default\css\admin.scss" />
+    <None Include="wwwroot\Themes\Default\css\belowthefold.scss" />
+    <None Include="wwwroot\Themes\Default\css\comments.scss" />
+    <None Include="wwwroot\Themes\Default\css\login.scss" />
+    <None Include="wwwroot\Themes\Default\css\_variables.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Azure.ImageOptimizer" Version="1.1.0.39" />
     <PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.250" />
     <PackageReference Include="LigerShark.WebOptimizer.Sass" Version="3.0.40-beta" />
@@ -39,6 +55,41 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Themes\Dorian\Blog\" />
+    <Folder Include="Views\Themes\Dorian\css\" />
+    <Folder Include="Views\Themes\Dorian\Shared\" />
+    <Folder Include="wwwroot\Themes\Default\js\" />
+    <Folder Include="wwwroot\Themes\StanfordPark\js\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\Themes\StanfordPark\css\abovethefold.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\Themes\StanfordPark\css\admin.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\Themes\StanfordPark\css\belowthefold.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\Themes\StanfordPark\css\comments.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\Themes\StanfordPark\css\login.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\Themes\StanfordPark\css\_variables.scss">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

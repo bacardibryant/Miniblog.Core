@@ -4,13 +4,15 @@ namespace Miniblog.Core
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc.Razor;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.DependencyInjection.Extensions;
+    using Microsoft.Extensions.FileProviders;
     using Microsoft.Extensions.Hosting;
-
+    using Microsoft.Extensions.Options;
     using Miniblog.Core.Services;
-
+    using System.IO;
     using WebEssentials.AspNetCore.OutputCaching;
 
     using WebMarkupMin.AspNetCore2;
@@ -43,6 +45,8 @@ namespace Miniblog.Core
         /// <remarks>This method gets called by the runtime. Use this method to configure the HTTP request pipeline.</remarks>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var blogSettings = app.ApplicationServices.GetRequiredService<IOptions<BlogSettings>>();
+
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
@@ -64,7 +68,14 @@ namespace Miniblog.Core
             app.UseStatusCodePagesWithReExecute("/Shared/Error");
             app.UseWebOptimizer();
 
-            app.UseStaticFilesWithCache();
+            //app.UseStaticFilesWithCache();
+
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),
+                $@"Views/Themes/{blogSettings.Value.Theme}")),
+                RequestPath = string.Empty
+            });
 
             if (this.Configuration.GetValue<bool>("forcessl"))
             {
@@ -84,13 +95,14 @@ namespace Miniblog.Core
             app.UseEndpoints(
                 endpoints =>
                 {
-                    endpoints.MapControllerRoute("default", "{controller=Blog}/{action=Index}/{id?}");
+                    endpoints.MapControllerRoute("default", "{ controller=Blog}/{action=Index}/{id?}");
                 });
         }
 
         /// <remarks>This method gets called by the runtime. Use this method to add services to the container.</remarks>
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllersWithViews();
             services.AddRazorPages();
 
@@ -99,6 +111,11 @@ namespace Miniblog.Core
             services.Configure<BlogSettings>(this.Configuration.GetSection("blog"));
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddMetaWeblog<MetaWeblogService>();
+
+            services.Configure<RazorViewEngineOptions>(options =>
+            {
+                options.ViewLocationExpanders.Add(new ThemeViewLocationExpander());
+            });
 
             // Progressive Web Apps https://github.com/madskristensen/WebEssentials.AspNetCore.ServiceWorker
             services.AddProgressiveWebApp(
@@ -113,7 +130,7 @@ namespace Miniblog.Core
                 {
                     options.Profiles["default"] = new OutputCacheProfile
                     {
-                        Duration = 3600
+                        Duration = 0
                     };
                 });
 
